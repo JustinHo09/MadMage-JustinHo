@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2797259319825790941, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
+      propertyPath: m_Mass
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4850937264305302378, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
       propertyPath: m_Name
       value: metalPillar
