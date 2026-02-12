@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 545190831778907063}
   - component: {fileID: 8542033051210310513}
   - component: {fileID: -5562529915485437990}
+  - component: {fileID: 1867105698211695864}
   m_Layer: 0
   m_Name: woodBeam
   m_TagString: Block
@@ -186,7 +187,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 36
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -264,3 +265,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1867105698211695864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708627465534064290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198710082217b4a53a599c2f069d68d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::blockBehavior
