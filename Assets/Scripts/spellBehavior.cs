@@ -4,6 +4,9 @@ public class spellBehavior : MonoBehaviour
 {
     public ParticleSystem burst;
     public int damage;
+    public AudioSource destroy;
+
+    public int cost;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,10 +21,9 @@ public class spellBehavior : MonoBehaviour
     
     public void OnCollisionEnter2D(Collision2D collision) {
         burst.Play();
-        if (collision.gameObject.tag.Equals("Block"))
-        {
-            //Destroy(this);
-        }
+        destroy.Play();
+        Destroy(this);
+        
         //destory and do damage to blocks and enemies
         
     }

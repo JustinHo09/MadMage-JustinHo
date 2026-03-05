@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class blockBehavior : MonoBehaviour
+public class enemyBehavior : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-    public AudioSource destroy;
     public int hp;
     public int points;
+
+    public AudioSource death;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
@@ -17,12 +17,12 @@ public class blockBehavior : MonoBehaviour
     {
         
     }
-
+    
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag.Equals("Spell")){
             hp = hp - collision.gameObject.GetComponent<spellBehavior>().damage;
             if(hp <=0 ){
-                destroy.Play();
+                death.Play();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
                 Destroy(this);
             }

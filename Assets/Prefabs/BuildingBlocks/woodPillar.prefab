@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2797259319825790941}
   - component: {fileID: 5502372609273426025}
   - component: {fileID: 5250177885382885164}
+  - component: {fileID: 533614614583854336}
   m_Layer: 0
   m_Name: woodPillar
   m_TagString: Block
@@ -264,3 +265,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &533614614583854336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850937264305302378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198710082217b4a53a599c2f069d68d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::blockBehavior
+  audioSource: {fileID: 5250177885382885164}
