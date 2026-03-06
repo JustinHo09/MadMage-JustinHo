@@ -23,8 +23,5 @@ public class spellBehavior : MonoBehaviour
         burst.Play();
         destroy.Play();
         Destroy(this);
-        
-        //destory and do damage to blocks and enemies
-        
     }
 }

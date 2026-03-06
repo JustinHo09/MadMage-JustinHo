@@ -5,6 +5,7 @@ public class enemyBehavior : MonoBehaviour
     public int hp;
     public int points;
 
+    public ParticleSystem deathVFX;
     public AudioSource death;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,7 +22,9 @@ public class enemyBehavior : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag.Equals("Spell")){
             hp = hp - collision.gameObject.GetComponent<spellBehavior>().damage;
-            if(hp <=0 ){
+            if(hp <=0 )
+            {
+                deathVFX.Play();
                 death.Play();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
                 Destroy(this);

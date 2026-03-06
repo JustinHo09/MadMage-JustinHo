@@ -5,6 +5,8 @@ public class blockBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     public AudioSource destroy;
+    public ParticleSystem destroyVFX;
+    
     public int hp;
     public int points;
     void Start()
@@ -22,6 +24,7 @@ public class blockBehavior : MonoBehaviour
         if (collision.gameObject.tag.Equals("Spell")){
             hp = hp - collision.gameObject.GetComponent<spellBehavior>().damage;
             if(hp <=0 ){
+                destroyVFX.Play();
                 destroy.Play();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
                 Destroy(this);

@@ -39,7 +39,7 @@ public class playerBehavior : MonoBehaviour
         }
         
         // Checks the first game over condition which is no more mana, only after the last spell is gone.
-        if (currentMana == 0 && GameObject.FindGameObjectsWithTag("spell").Length == 0)
+        if (currentMana == 0 && GameObject.FindGameObjectsWithTag("Spell").Length == 0)
         {
             if (GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
             {
