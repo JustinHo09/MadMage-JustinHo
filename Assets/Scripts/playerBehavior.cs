@@ -19,6 +19,8 @@ public class playerBehavior : MonoBehaviour
     public TMP_Text score;
     public int points;
     
+    public Animator animations;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,6 +49,7 @@ public class playerBehavior : MonoBehaviour
                 this.enabled = false;
             }else{
                 gameOver.SetActive(true);
+                animations.SetTrigger("Lose");
                 this.enabled = false;
             }
         }
@@ -58,6 +61,7 @@ public class playerBehavior : MonoBehaviour
             manaBar.value = currentMana;
             
             cast.Play();
+            animations.SetTrigger("Attack");
             
             // Launch the spell
             

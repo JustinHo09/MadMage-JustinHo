@@ -40,6 +40,6 @@ public class itemBehavior : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         destroy.Play();
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

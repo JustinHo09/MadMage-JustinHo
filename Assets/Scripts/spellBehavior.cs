@@ -21,7 +21,7 @@ public class spellBehavior : MonoBehaviour
     
     public void OnCollisionEnter2D(Collision2D collision) {
         burst.Play();
-        destroy.Play();
-        Destroy(this);
+        //destroy.Play();
+        Destroy(gameObject,0.4f);
     }
 }

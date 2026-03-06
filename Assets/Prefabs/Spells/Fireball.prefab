@@ -5040,6 +5040,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::spellBehavior
   burst: {fileID: 1353688579464858270}
   damage: 10
+  destroy: {fileID: 0}
+  cost: 10
 --- !u!1 &5441360099722521877
 GameObject:
   m_ObjectHideFlags: 0

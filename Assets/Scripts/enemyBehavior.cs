@@ -27,7 +27,7 @@ public class enemyBehavior : MonoBehaviour
                 deathVFX.Play();
                 death.Play();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
-                Destroy(this);
+                Destroy(gameObject,1.0f);
             }
         }
     }
