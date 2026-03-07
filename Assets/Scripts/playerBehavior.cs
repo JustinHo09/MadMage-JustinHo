@@ -37,6 +37,7 @@ public class playerBehavior : MonoBehaviour
         if(GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
         {
             victory.SetActive(true);
+            animations.SetTrigger("Win");
             this.enabled = false;
         }
         
