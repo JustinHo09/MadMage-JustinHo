@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8866433755584339493}
   m_Layer: 0
   m_Name: GreenDragon
-  m_TagString: Untagged
+  m_TagString: Dragon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
