@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2172479242584655931, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: m_Mass
+      value: 1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1313882359208442906, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime0
       value: 4433
@@ -215,6 +219,10 @@ PrefabInstance:
     - target: {fileID: 4512100903308044006, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589458833052191575, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: dotDMG
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5217414914261338548, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Name

@@ -8,8 +8,8 @@ public class playerBehavior : MonoBehaviour
     public int maxMana;
     public int currentMana;
     
-    public GameObject spell;
-    public GameObject[] spells;
+    //public GameObject spell;
+    // public GameObject[] spells;
 
     public AudioSource cast;
     
@@ -18,35 +18,33 @@ public class playerBehavior : MonoBehaviour
 
     public TMP_Text score;
     public int points;
+
+    private int lowestCost;
     
     public Animator animations;
     
-    private Camera cam;
-    public float multiplier;
-    public float maxDrag;
-    private Vector2 startPos;
-    private int currentSpell;
+    // private Camera cam;
+    // public float multiplier;
+    // public float maxDrag;
+    // private Vector2 startPos;
+    //private int currentSpell;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentSpell=0;
-        spell = Instantiate(spells[currentSpell],new Vector3(transform.position.x+2.0f, transform.position.y+3.0f,0.0f),Quaternion.identity);
-        cam = Camera.main;
+        //currentSpell=0;
+        //spell = Instantiate(spells[currentSpell],new Vector3(transform.position.x+2.0f, transform.position.y+3.0f,0.0f),Quaternion.identity);
         currentMana = maxMana;
         manaBar.maxValue = maxMana;
         manaBar.value = currentMana;
         score.SetText("SCORE: " + points);
+        lowestCost = GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().lowestCost;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(spell == null)
-        {
-            spell = Instantiate(spells[currentSpell],new Vector3(transform.position.x+2.0f, transform.position.y+3.0f,0.0f),Quaternion.identity);
-        }
         // Checks the victory condition of no more enemies
         if(GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
         {
@@ -56,75 +54,23 @@ public class playerBehavior : MonoBehaviour
         }
         
         // Checks the first game over condition which is no more mana, only after the last spell is gone.
-        // Also check to make sure that the lowest spell cost - current mana >=0 other wise it would be
+        // Also check to make sure that the lowest spell cost - current mana >=0 otherwise it would be
         // impossible to win thus being a loss
-        if (currentMana == 0 && GameObject.FindGameObjectsWithTag("Spell").Length == 0)
+        if (currentMana - lowestCost < 0 && GameObject.FindGameObjectsWithTag("Spell").Length == 0)
         {
             if (GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
             {
                 victory.SetActive(true);
                 this.enabled = false;
             }else{
+                GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().warningSign.SetActive(false);
                 gameOver.SetActive(true);
                 animations.SetTrigger("Lose");
                 this.enabled = false;
             }
         }
 
-        if (currentMana - spell.GetComponent<spellBehavior>().cost >= 0)
-        {
-            // Mouse click down so it is starting pos
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                Vector2 mousePos = Mouse.current.position.value;
-                startPos = cam.ScreenToWorldPoint(mousePos);
-            }
-
-            // Mouse drag to get every current position
-            if (Mouse.current.leftButton.isPressed)
-            {
-                Vector2 mousePos = Mouse.current.position.value;
-                Vector2 currentPos = cam.ScreenToWorldPoint(mousePos);
-                // make sure currentPos does not excede bounds
-                if ((startPos.x - currentPos.x > maxDrag || startPos.x - currentPos.x < -maxDrag) &&
-                    (startPos.y - currentPos.y > maxDrag || startPos.y - currentPos.y < -maxDrag)) {
-                    if (startPos.x - currentPos.x > maxDrag)
-                    {
-                        currentPos.x = startPos.x + maxDrag;
-                    }
-                    else if (startPos.x - currentPos.x < -maxDrag)
-                    {
-                        currentPos.x = startPos.x - maxDrag;
-                    }
-
-                    if (startPos.y - currentPos.y > maxDrag)
-                    {
-                        currentPos.y = startPos.y + maxDrag;
-                    }
-                    else if (startPos.y - currentPos.y < -maxDrag)
-                    {
-                        currentPos.y = startPos.y - maxDrag;
-                    }
-                }
-            }
-
-            // Mouse release to get final position
-            if (Mouse.current.leftButton.wasReleasedThisFrame)
-            {
-                currentMana -= spell.GetComponent<spellBehavior>().cost;
-                manaBar.value = currentMana;
-
-                cast.Play();
-                animations.SetTrigger("Attack");
-                Vector2 mousePos = Mouse.current.position.value;
-                Vector2 endPos = cam.ScreenToWorldPoint(mousePos);
-                Vector2 force = (startPos - endPos) * multiplier;
-
-                spell.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
-                spell.GetComponent<Collider2D>().enabled = true;
-                spell.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-            }
-        }
+        
     }
 
     public void updateScore(int add)
@@ -133,13 +79,11 @@ public class playerBehavior : MonoBehaviour
         score.SetText("SCORE: "+points);
     }
     
-    public void updateSpell(int newSpell)
+    
+    public void updateMana(int manaChange)
     {
-        currentSpell= newSpell;
-        Destroy(spell);
-        spell = Instantiate(spells[newSpell],new Vector3(0.0f,0.0f,0.0f),Quaternion.identity);
-        spell.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-        spell.GetComponent<Collider2D>().enabled = true;
+        currentMana += manaChange;
+        manaBar.value = currentMana;
     }
     
 }

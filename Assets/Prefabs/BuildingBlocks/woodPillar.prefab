@@ -277,4 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198710082217b4a53a599c2f069d68d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::blockBehavior
-  audioSource: {fileID: 5250177885382885164}
+  destroy: {fileID: 0}
+  destroyVFX: {fileID: 0}
+  hp: 20
+  points: 0

@@ -5041,6 +5041,8 @@ MonoBehaviour:
   damage: 10
   destroy: {fileID: 0}
   cost: 10
+  dot: 1
+  dotDMG: 1
   animations: {fileID: 6829888364296644913}
 --- !u!95 &6829888364296644913
 Animator:
@@ -5050,7 +5052,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5217414914261338548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 218ff3a7b1f954f80bec4f725b15c398, type: 2}
   m_CullingMode: 0

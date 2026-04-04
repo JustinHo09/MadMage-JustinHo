@@ -8,6 +8,7 @@ TagManager:
   - Block
   - Dragon
   - Level
+  - Launcher
   layers:
   - Default
   - TransparentFX
