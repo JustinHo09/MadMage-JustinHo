@@ -8,7 +8,7 @@ public class LauncherBehavior : MonoBehaviour
     public bool isCasting;
     
     public GameObject spell;
-    public GameObject oldSpell;
+    private GameObject oldSpell;
     public GameObject[] spells;
     public int currentSpell;
 
@@ -19,11 +19,18 @@ public class LauncherBehavior : MonoBehaviour
     public float maxDrag;
     private Vector2 startPos;
     
+    public int dots;
+    private LineRenderer tracer;
+    public float timeInterval;
+    
     public GameObject warningSign;
     public TMP_Text castable;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        tracer = GetComponent<LineRenderer>();
+        //tracer.transform.position = transform.position;
+        tracer.enabled = false;
         isCasting = false;
         currentSpell=0;
         cam = Camera.main;
@@ -53,7 +60,7 @@ public class LauncherBehavior : MonoBehaviour
             castable.SetText("Not Enough Mana To Cast This Spell, Try Another One");
         }
 
-        if (isCasting == false)
+        if (isCasting == false && currentMana - lowestCost >= 0)
         {
             // left arrow
             if (Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame)
@@ -89,30 +96,14 @@ public class LauncherBehavior : MonoBehaviour
                 // Mouse drag to get every current position
                 if (Mouse.current.leftButton.isPressed)
                 {
-                    Vector2 mousePos = Mouse.current.position.value;
+                    Vector3 mousePos = Mouse.current.position.value;
+                    mousePos.z = Mathf.Abs(cam.transform.position.z);
                     Vector2 currentPos = cam.ScreenToWorldPoint(mousePos);
-                    // make sure currentPos does not excede bounds
-                    if ((startPos.x - currentPos.x > maxDrag || startPos.x - currentPos.x < -maxDrag) &&
-                        (startPos.y - currentPos.y > maxDrag || startPos.y - currentPos.y < -maxDrag))
-                    {
-                        if (startPos.x - currentPos.x > maxDrag)
-                        {
-                            currentPos.x = startPos.x + maxDrag;
-                        }
-                        else if (startPos.x - currentPos.x < -maxDrag)
-                        {
-                            currentPos.x = startPos.x - maxDrag;
-                        }
-
-                        if (startPos.y - currentPos.y > maxDrag)
-                        {
-                            currentPos.y = startPos.y + maxDrag;
-                        }
-                        else if (startPos.y - currentPos.y < -maxDrag)
-                        {
-                            currentPos.y = startPos.y - maxDrag;
-                        }
-                    }
+                    Vector2 dragDist = startPos - currentPos;
+                    // Will ensure that the dragDistance will never excede the maximum
+                    dragDist = Vector2.ClampMagnitude(dragDist, maxDrag);
+                    
+                    showTracer(dragDist * multiplier);
                 }
 
                 // Mouse release to get final position
@@ -121,16 +112,22 @@ public class LauncherBehavior : MonoBehaviour
                     GetComponentInParent<playerBehavior>().updateMana(-spell.GetComponent<spellBehavior>().cost);
                     GetComponentInParent<playerBehavior>().cast.Play();
                     GetComponentInParent<playerBehavior>().animations.SetTrigger("Attack");
-                    Vector2 mousePos = Mouse.current.position.value;
+                    Vector3 mousePos = Mouse.current.position.value;
+
+                    mousePos.z = Mathf.Abs(cam.transform.position.z);
                     Vector2 endPos = cam.ScreenToWorldPoint(mousePos);
-                    Vector2 force = (startPos - endPos) * multiplier;
+                    Vector2 dragDist = startPos - endPos;
+                    dragDist = Vector2.ClampMagnitude(dragDist, maxDrag);
+                    Vector2 force = dragDist * multiplier;
 
                     spell.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
                     spell.GetComponent<Collider2D>().enabled = true;
                     spell.GetComponent<Animator>().enabled = true;
+                    
                     spell.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
                     oldSpell = spell;
                     spell = null;
+                    tracer.enabled = false;
                 }
             }
         }
@@ -143,5 +140,23 @@ public class LauncherBehavior : MonoBehaviour
             Destroy(spell);
         }
         spell = Instantiate(spells[newSpell],transform.position,Quaternion.identity);
+    }
+
+    public void showTracer(Vector2 force)
+    {
+        tracer.enabled = true;
+        tracer.positionCount = dots;
+
+        Vector3[] points = new Vector3 [dots];
+        Vector2 velocity = force / spell.GetComponent<Rigidbody2D>().mass;
+        Vector2 startPos = transform.position;
+
+        for (int i = 0; i < dots; i++)
+        {
+            float t = i * timeInterval;
+            Vector2 pos = startPos + velocity * t + 0.5f * (Physics2D.gravity*gravityScale)* t * t;
+            points[i] = pos;
+        }
+        tracer.SetPositions(points);
     }
 }
