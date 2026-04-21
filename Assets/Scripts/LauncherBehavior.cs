@@ -11,6 +11,7 @@ public class LauncherBehavior : MonoBehaviour
     private GameObject oldSpell;
     public GameObject[] spells;
     public int currentSpell;
+    private int currentMana;
 
     public int lowestCost;
     
@@ -45,43 +46,47 @@ public class LauncherBehavior : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        int currentMana = GetComponentInParent<playerBehavior>().currentMana;
-        
-        // only create the spell if there is none and there is enough mana to cast it
-        if (spell == null && oldSpell == null && currentMana - lowestCost >= 0)  
-        {
-            spell = Instantiate(spells[currentSpell],transform.position,Quaternion.identity);
-        }else if(currentMana - spells[currentSpell].GetComponent<spellBehavior>().cost < 0)
-        {
-            warningSign.SetActive(true);
-            castable.SetText("Not Enough Mana To Cast This Spell, Try Another One");
-        }
-
-        if (isCasting == false && currentMana - lowestCost >= 0)
-        {
-            // left arrow
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame)
-            {
-                currentSpell--;
-                if (currentSpell < 0)
+        currentMana = GetComponentInParent<playerBehavior>().currentMana;
+                
+                // only create the spell if there is none and there is enough mana to cast it
+                if (spell == null && oldSpell == null && currentMana - lowestCost >= 0)  
                 {
-                    currentSpell = spells.Length-1;
+                    spell = Instantiate(spells[currentSpell],transform.position,Quaternion.identity);
+                }else if(currentMana - spells[currentSpell].GetComponent<spellBehavior>().cost < 0)
+                {
+                    warningSign.SetActive(true);
+                    castable.SetText("Not Enough Mana To Cast This Spell, Try Another One");
                 }
-                updateSpell(currentSpell);
-            }
-            
-            //right arrow
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame)
-            {
-                currentSpell++;
-                currentSpell = currentSpell % spells.Length;
-                updateSpell(currentSpell);
-            }
-        }
         
+                if (isCasting == false && currentMana - lowestCost >= 0)
+                {
+                    // left arrow
+                    if (Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame)
+                    {
+                        currentSpell--;
+                        if (currentSpell < 0)
+                        {
+                            currentSpell = spells.Length-1;
+                        }
+                        updateSpell(currentSpell);
+                    }
+                    
+                    //right arrow
+                    if (Keyboard.current.rightArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame)
+                    {
+                        currentSpell++;
+                        currentSpell = currentSpell % spells.Length;
+                        updateSpell(currentSpell);
+                    }
+                }
+                
+    }
+    
+    // Update is called once per frame
+    void fixedUpdate()
+    {
         if(spell!=null){
             if (currentMana - spell.GetComponent<spellBehavior>().cost >= 0)
             {
@@ -124,7 +129,7 @@ public class LauncherBehavior : MonoBehaviour
                     spell.GetComponent<Collider2D>().enabled = true;
                     spell.GetComponent<Animator>().enabled = true;
                     
-                    spell.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+                    spell.GetComponent<Rigidbody2D>().AddForce(force * Time.fixedDeltaTime, ForceMode2D.Impulse);
                     oldSpell = spell;
                     spell = null;
                     tracer.enabled = false;

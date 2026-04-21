@@ -3,10 +3,7 @@ using UnityEngine;
 public class blockBehavior : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-    public AudioSource destroy;
-    public ParticleSystem destroyVFX;
-    
+
     public float hp;
     public int points;
 
@@ -38,8 +35,7 @@ public class blockBehavior : MonoBehaviour
         }
         
         if(hp <=0 ){
-            //destroyVFX.Play();
-            //destroy.Play();
+
             GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
             Destroy(gameObject,0.4f);
         }
