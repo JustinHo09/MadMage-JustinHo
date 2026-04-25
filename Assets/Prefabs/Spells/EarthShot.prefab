@@ -10,15 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3080494028378138970, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Color.b
-      value: 0.1764706
+      value: 0.07769669
       objectReference: {fileID: 0}
     - target: {fileID: -3080494028378138970, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Color.g
-      value: 0.3215686
+      value: 0.10733356
       objectReference: {fileID: 0}
     - target: {fileID: -3080494028378138970, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Color.r
-      value: 0.627451
+      value: 0.16981131
+      objectReference: {fileID: 0}
+    - target: {fileID: -3080494028378138970, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.285
       objectReference: {fileID: 0}
     - target: {fileID: -2172479242584655931, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Mass
@@ -132,6 +136,14 @@ PrefabInstance:
       propertyPath: dot
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4589458833052191575, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: cost
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589458833052191575, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5217414914261338548, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_Name
       value: EarthShot
@@ -144,6 +156,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 6817854425926531477, guid: e4a4780de7e544f83a4d49bf61112aca, type: 3}
+    - target: {fileID: 8875665130545104465, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875665130545104465, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875665130545104465, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9191910150745370487, guid: fc3586f98363a4c0abb445e473fe760d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2

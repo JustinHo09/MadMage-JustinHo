@@ -6,14 +6,19 @@ public class gameController : MonoBehaviour
     public GameObject [] levels;
     // Keep track of index of levels visted from levels array
     private int [] visited;
-    private int currentLevel;
+    public int currentLevel;
+    private int size;
+    public GameObject victory;
 
     public AudioSource [] breaks;
+    public AudioSource death;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         visited = new int[levels.Length];
+        currentLevel = 0;
+        size = 0;
     }
 
     // Update is called once per frame
@@ -24,7 +29,16 @@ public class gameController : MonoBehaviour
     
     public void nextLevel()
     {
-        
+        visited[size] = currentLevel;
+        size++;
+        if (size != levels.Length) {
+            currentLevel = getNextLevel(currentLevel, 0);
+        }
+        else
+        {
+            victory.SetActive(true);
+            //Disable all other scripts
+        }
     }
 
     private int getNextLevel(int current, int count)
@@ -37,8 +51,4 @@ public class gameController : MonoBehaviour
         return nextLevel;
     }
     
-    public void restart()
-    {
-        
-    }
 }

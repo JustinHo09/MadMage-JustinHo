@@ -8,8 +8,7 @@ public class playerBehavior : MonoBehaviour
     public int maxMana;
     public int currentMana;
     
-    //public GameObject spell;
-    // public GameObject[] spells;
+
 
     public AudioSource cast;
     
@@ -22,19 +21,11 @@ public class playerBehavior : MonoBehaviour
     private int lowestCost;
     
     public Animator animations;
-    
-    // private Camera cam;
-    // public float multiplier;
-    // public float maxDrag;
-    // private Vector2 startPos;
-    //private int currentSpell;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //currentSpell=0;
-        //spell = Instantiate(spells[currentSpell],new Vector3(transform.position.x+2.0f, transform.position.y+3.0f,0.0f),Quaternion.identity);
         currentMana = maxMana;
         manaBar.maxValue = maxMana;
         manaBar.value = currentMana;
@@ -84,6 +75,14 @@ public class playerBehavior : MonoBehaviour
     {
         currentMana += manaChange;
         manaBar.value = currentMana;
+    }
+    
+    public void restart()
+    {
+        currentMana = maxMana;
+        manaBar.value = currentMana;
+        gameOver.SetActive(false);
+        animations.SetTrigger("Restart");
     }
     
 }

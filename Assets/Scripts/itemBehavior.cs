@@ -5,18 +5,23 @@ using Random = UnityEngine.Random;
 public class itemBehavior : MonoBehaviour
 {
     public bool buff;
+    public bool random;
     private int manaChange;
 
-    public ParticleSystem burst;
+    public Sprite[] sprites;
+    private float currentTime;
+
     public int playerMana;
+    
 
     public AudioSource destroy;
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    GameObject player;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerMana = player.GetComponent<playerBehavior>().currentMana;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerMana = player.GetComponent<playerBehavior>().maxMana;
         int rng = Random.Range(0, 50);
         if (rng > 25)
         {
@@ -26,6 +31,16 @@ public class itemBehavior : MonoBehaviour
         {
             manaChange = playerMana/10 ;
         }
+
+        if (random)
+        {
+            int chance = Random.Range(0, 11);
+            if (chance <= 5)
+            {
+                buff = false;
+            }
+        }
+
         if (!buff)
         {
             manaChange = -manaChange;
@@ -35,22 +50,22 @@ public class itemBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (random && Time.time - currentTime > 5.0f)
+        {
+            GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+            currentTime = Time.time;
+        }
     }
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        player.GetComponent<playerBehavior>().updateMana(manaChange);
+        if (collision.CompareTag("Spell"))
+        { 
+            player.GetComponent<playerBehavior>().updateMana(manaChange);
+            //destroy.Play();
+            Destroy(gameObject, 0.01f);
+        }
     }
 
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        burst.Play();
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        destroy.Play();
-        Destroy(gameObject);
-    }
+    
 }

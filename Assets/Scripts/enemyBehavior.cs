@@ -6,7 +6,6 @@ public class enemyBehavior : MonoBehaviour
     public int points;
 
     public ParticleSystem deathVFX;
-    public AudioSource death;
     
     private bool ailment;
     private float dotDMG;
@@ -39,7 +38,6 @@ public class enemyBehavior : MonoBehaviour
         
         if(hp <=0 ) {
             //deathVFX.Play();
-            //death.Play();
             GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
             Destroy(gameObject,0.5f);
         }

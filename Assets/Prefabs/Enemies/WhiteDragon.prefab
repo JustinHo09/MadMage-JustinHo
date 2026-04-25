@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhiteDragon
       objectReference: {fileID: 0}
+    - target: {fileID: 2410599897245724135, guid: 8254c7d7064984f1e9529e5d46226072, type: 3}
+      propertyPath: hp
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4131299863310372524, guid: 8254c7d7064984f1e9529e5d46226072, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

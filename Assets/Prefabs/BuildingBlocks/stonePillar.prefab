@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6360848497206854197, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
+      propertyPath: hp
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3597074413853079821, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -55,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 3952846207301458241, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261165503810631455, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
+      propertyPath: m_Mass
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8845021927351839405, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
       propertyPath: m_Name

@@ -7,8 +7,9 @@ public class blockBehavior : MonoBehaviour
     public float hp;
     public int points;
 
-    private bool ailment;
-    private float dotDMG;
+    public bool ailment;
+    public float dotDMG;
+    private int counter;
 
     private float start;
     void Start()
@@ -20,34 +21,30 @@ public class blockBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ailment)
+        if (ailment && Time.time - start < 4.0f )
         {
-            if (Time.deltaTime - start > 1.0f)
-            {
                 hp -= dotDMG;
-            }
-
-            if (start >= 5.0)
-            {
-                ailment = false;
-                start = 0.0f;
-            }
+               
+        }else
+        {
+            ailment = false;
         }
         
         if(hp <=0 ){
 
             GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
-            Destroy(gameObject,0.4f);
+            Destroy(gameObject,0.1f);
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag.Equals("Spell")){
             hp = hp - collision.gameObject.GetComponent<spellBehavior>().damage;
-            if (collision.gameObject.GetComponent<spellBehavior>().dot)
+            if (collision.gameObject.GetComponent<spellBehavior>().dot == true)
             {
-                ailment = true;
                 dotDMG = collision.gameObject.GetComponent<spellBehavior>().dotDMG;
+                start = Time.time;
+                ailment = true;
             }
         }
     }
