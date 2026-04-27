@@ -13,10 +13,12 @@ public class playerBehavior : MonoBehaviour
     public AudioSource cast;
     
     public GameObject gameOver;
-    public GameObject victory;
+    public GameObject nextLevel;
+    public TMP_Text endScore;
 
     public TMP_Text score;
     public int points;
+    public int oldPoint;
 
     private int lowestCost;
     
@@ -30,6 +32,7 @@ public class playerBehavior : MonoBehaviour
         manaBar.maxValue = maxMana;
         manaBar.value = currentMana;
         score.SetText("SCORE: " + points);
+        oldPoint = 0;
         lowestCost = GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().lowestCost;
     }
 
@@ -39,9 +42,12 @@ public class playerBehavior : MonoBehaviour
         // Checks the victory condition of no more enemies
         if(GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
         {
-            victory.SetActive(true);
+            nextLevel.SetActive(true);
+            endScore.SetText("SCORE: "+points);
             animations.SetTrigger("Win");
             this.enabled = false;
+            GetComponentInChildren<LauncherBehavior>().enabled = false;
+            oldPoint = points;
         }
         
         // Checks the first game over condition which is no more mana, only after the last spell is gone.
@@ -51,11 +57,14 @@ public class playerBehavior : MonoBehaviour
         {
             if (GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
             {
-                victory.SetActive(true);
+                nextLevel.SetActive(true);
                 this.enabled = false;
+                GetComponentInChildren<LauncherBehavior>().enabled = false;
+                oldPoint = points;
             }else{
                 GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().warningSign.SetActive(false);
                 gameOver.SetActive(true);
+                GetComponentInChildren<LauncherBehavior>().enabled = false;
                 animations.SetTrigger("Lose");
                 this.enabled = false;
             }
@@ -79,10 +88,14 @@ public class playerBehavior : MonoBehaviour
     
     public void restart()
     {
+        points = oldPoint;
+        score.SetText("SCORE: "+points);
         currentMana = maxMana;
         manaBar.value = currentMana;
         gameOver.SetActive(false);
         animations.SetTrigger("Restart");
+        GetComponentInChildren<LauncherBehavior>().enabled = true;
+        this.enabled = true;
     }
     
 }

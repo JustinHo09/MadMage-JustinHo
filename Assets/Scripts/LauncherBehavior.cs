@@ -13,6 +13,8 @@ public class LauncherBehavior : MonoBehaviour
     public int currentSpell;
     private int currentMana;
 
+    public Sprite[] sprites;
+    public GameObject spellPrev;
 
     public int lowestCost;
     
@@ -36,6 +38,7 @@ public class LauncherBehavior : MonoBehaviour
         isCasting = false;
         currentSpell=0;
         cam = Camera.main;
+        spellPrev.GetComponent<SpriteRenderer>().sprite = sprites[0];
         spell = Instantiate(spells[currentSpell],transform.position,Quaternion.identity);
         lowestCost = spells[0].GetComponent<spellBehavior>().cost;
         for (int i = 1; i < spells.Length; i++)
@@ -55,7 +58,6 @@ public class LauncherBehavior : MonoBehaviour
         {
             warningSign.SetActive(false);
         }else{
-            warningSign.SetActive(true);
             warningSign.SetActive(true);
         }
 
@@ -81,6 +83,7 @@ public class LauncherBehavior : MonoBehaviour
                     currentSpell = spells.Length-1;
                 }
                 updateSpell(currentSpell);
+                spellPrev.GetComponent<SpriteRenderer>().sprite = sprites[currentSpell];
             }
                     
             //right arrow
@@ -89,6 +92,7 @@ public class LauncherBehavior : MonoBehaviour
                 currentSpell++;
                 currentSpell = currentSpell % spells.Length;
                 updateSpell(currentSpell);
+                spellPrev.GetComponent<SpriteRenderer>().sprite = sprites[currentSpell];
             }
         }
                 
