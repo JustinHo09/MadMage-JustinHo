@@ -96,6 +96,7 @@ public class playerBehavior : MonoBehaviour
         animations.SetTrigger("Restart");
         GetComponentInChildren<LauncherBehavior>().enabled = true;
         this.enabled = true;
+        nextLevel.SetActive(false);
     }
     
 }
