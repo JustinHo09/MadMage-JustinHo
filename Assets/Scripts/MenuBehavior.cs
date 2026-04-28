@@ -13,4 +13,22 @@ public class MenuBehavior : MonoBehaviour
     {
         
     }
+
+    public void pause()
+    {
+        Time.timeScale = 0;
+    }
+    
+    public void compensate()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<playerBehavior>().updateMana
+            (player.GetComponentInChildren<LauncherBehavior>().spell.GetComponent<spellBehavior>().cost);
+    }
+    
+    
+    public void unpause()
+    {
+        Time.timeScale = 1;
+    }
 }

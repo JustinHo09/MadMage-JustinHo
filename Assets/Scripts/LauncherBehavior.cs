@@ -54,7 +54,7 @@ public class LauncherBehavior : MonoBehaviour
     {
         currentMana = GetComponentInParent<playerBehavior>().currentMana;
         
-        if(currentMana - spells[currentSpell].GetComponent<spellBehavior>().cost > 0 || currentMana == 0)
+        if(currentMana - spells[currentSpell].GetComponent<spellBehavior>().cost >= 0 || currentMana == 0)
         {
             warningSign.SetActive(false);
         }else{
@@ -111,7 +111,6 @@ public class LauncherBehavior : MonoBehaviour
                 if (Mouse.current.leftButton.isPressed)
                 {
                     Vector3 mousePos = Mouse.current.position.value;
-                    mousePos.z = Mathf.Abs(cam.transform.position.z);
                     Vector2 currentPos = cam.ScreenToWorldPoint(mousePos);
                     Vector2 dragDist = startPos - currentPos;
                     // Will ensure that the dragDistance will never excede the maximum

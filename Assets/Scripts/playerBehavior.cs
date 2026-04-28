@@ -15,6 +15,7 @@ public class playerBehavior : MonoBehaviour
     public GameObject gameOver;
     public GameObject nextLevel;
     public TMP_Text endScore;
+    public TMP_Text loseScore;
 
     public TMP_Text score;
     public int points;
@@ -28,6 +29,7 @@ public class playerBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1;
         currentMana = maxMana;
         manaBar.maxValue = maxMana;
         manaBar.value = currentMana;
@@ -44,7 +46,7 @@ public class playerBehavior : MonoBehaviour
         {
             nextLevel.SetActive(true);
             endScore.SetText("SCORE: "+points);
-            animations.SetTrigger("Win");
+            animations.SetTrigger("Win"); 
             this.enabled = false;
             GetComponentInChildren<LauncherBehavior>().enabled = false;
             oldPoint = points;
@@ -58,12 +60,15 @@ public class playerBehavior : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Dragon").Length == 0)
             {
                 nextLevel.SetActive(true);
+                endScore.SetText("SCORE: "+points);
+                animations.SetTrigger("Win");
                 this.enabled = false;
                 GetComponentInChildren<LauncherBehavior>().enabled = false;
                 oldPoint = points;
             }else{
                 GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().warningSign.SetActive(false);
                 gameOver.SetActive(true);
+                loseScore.SetText("SCORE: " + points);
                 GetComponentInChildren<LauncherBehavior>().enabled = false;
                 animations.SetTrigger("Lose");
                 this.enabled = false;

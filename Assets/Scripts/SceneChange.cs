@@ -7,6 +7,7 @@ public class SceneChange : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1;
         toScene = 1;
     }
 
@@ -24,6 +25,7 @@ public class SceneChange : MonoBehaviour
     public void toGame()
     {
         SceneManager.LoadScene(toScene);
+        Time.timeScale = 1;
     }
     
     public void right()

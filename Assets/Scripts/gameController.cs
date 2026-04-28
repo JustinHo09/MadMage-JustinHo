@@ -68,6 +68,7 @@ public class gameController : MonoBehaviour
     public void restartLevel()
     {
         Destroy(level);
+        Destroy(GameObject.FindGameObjectWithTag("Spell"));
         level = Instantiate(levels[currentLevel], transform.position, Quaternion.identity);
         player.GetComponent<playerBehavior>().restart();
     }
