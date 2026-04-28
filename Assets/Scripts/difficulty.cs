@@ -17,6 +17,8 @@ public class difficulty : MonoBehaviour
         
     }
 
+    // Call left on the scene changer, and get that scene number then set the text indicating difficulty
+    // accordinng to the scene
     public void left()
     {
         sceneController.GetComponent<SceneChange>().left();
@@ -32,6 +34,8 @@ public class difficulty : MonoBehaviour
         }
     }
     
+    // Call right on the scene changer, and get that scene number then set the text indicating difficulty
+    // accordinng to the scene
     public void right()
     {
         sceneController.GetComponent<SceneChange>().right();

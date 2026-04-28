@@ -181,3 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::blockBehavior
   hp: 10
   points: 100
+  blockType: 1
+  ailment: 0
+  dotDMG: 0

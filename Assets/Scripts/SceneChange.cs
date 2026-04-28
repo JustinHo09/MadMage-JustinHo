@@ -17,17 +17,20 @@ public class SceneChange : MonoBehaviour
         
     }
 
+    // Go to main menu scene
     public void toMenu()
     {
         SceneManager.LoadScene(0);
     }
     
+    // Go the one of hte game scenes
     public void toGame()
     {
         SceneManager.LoadScene(toScene);
         Time.timeScale = 1;
     }
     
+    // Move the right on difficulty selector
     public void right()
     {
         toScene += 1;
@@ -37,6 +40,7 @@ public class SceneChange : MonoBehaviour
         }
     }
 
+    //Move to the left on the difficulty selector
     public void left()
     {
         toScene -= 1;

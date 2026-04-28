@@ -4,8 +4,6 @@ public class enemyBehavior : MonoBehaviour
 {
     public float hp;
     public int points;
-
-    public ParticleSystem deathVFX;
     
     private bool ailment;
     private float dotDMG;
@@ -24,20 +22,21 @@ public class enemyBehavior : MonoBehaviour
     {
         if (ailment)
         {
-            if (Time.deltaTime - start > 1.0f)
+            // If under ailment and the time elapsed is < 4 seconds then take teh DOT damage
+            if (ailment && Time.time - start < 4.0f )
             {
                 hp -= dotDMG;
-            }
-
-            if (start >= 5.0)
+                           
+            }else
+                // If four seconds have passed then disable ailment to stop the dot damage
             {
                 ailment = false;
-                start = 0.0f;
             }
         }
         
+        // if hp <= 0 then its dead, play the death audio, update the player's score, and destory it
         if(hp <=0 ) {
-            //deathVFX.Play();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<gameController>().death.Play();
             GameObject.FindGameObjectWithTag("Player").GetComponent<playerBehavior>().updateScore(points);
             Destroy(gameObject,0.5f);
         }
@@ -45,10 +44,13 @@ public class enemyBehavior : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag.Equals("Spell")){
+            // decrease it's hp
             hp = hp - collision.gameObject.GetComponent<spellBehavior>().damage;
+            // if it is a dot spell then makit it start taking dot damage
             if (collision.gameObject.GetComponent<spellBehavior>().dot)
             {
                 ailment = true;
+                start = Time.time;
                 dotDMG = collision.gameObject.GetComponent<spellBehavior>().dotDMG;
             }
         }

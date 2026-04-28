@@ -14,11 +14,13 @@ public class MenuBehavior : MonoBehaviour
         
     }
 
+    // Pauses the game by setting tiem scale to 0
     public void pause()
     {
         Time.timeScale = 0;
     }
     
+    // Make up for mana lost by clicking on meu buttons by giving them that mana back
     public void compensate()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -27,6 +29,8 @@ public class MenuBehavior : MonoBehaviour
     }
     
     
+    
+    // unpause tiem scale by setting it to 1
     public void unpause()
     {
         Time.timeScale = 1;

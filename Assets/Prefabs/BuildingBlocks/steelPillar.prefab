@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: hp
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: -6360848497206854197, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
+      propertyPath: blockType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3597074413853079821, guid: c6e547c4d6b074b9aae161ad669c9498, type: 3}
       propertyPath: m_Sprite
       value: 

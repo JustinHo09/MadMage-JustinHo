@@ -23,6 +23,7 @@ public class spellBehavior : MonoBehaviour
     }
     
     public void OnCollisionEnter2D(Collision2D collision) {
+        // It it touches anything destory it and disable casting for  the launcher
         animations.SetTrigger("Collision");
         GameObject.FindGameObjectWithTag("Launcher").GetComponent<LauncherBehavior>().isCasting = false;
         //destroy.Play();
